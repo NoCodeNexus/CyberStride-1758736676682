@@ -1,0 +1,425 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberStride - Future Footwear</title>
+    <style>
+        body {
+            font-family: 'Orbitron', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #00FF96; /* Neon Green */
+            overflow-x: hidden;
+        }
+
+        /* Keyframe Animations */
+        @keyframes neonGlow {
+            0% { text-shadow: 0 0 5px #00FF96; }
+            50% { text-shadow: 0 0 20px #00FF96; }
+            100% { text-shadow: 0 0 5px #00FF96; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Hamburger Menu Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            animation: neonGlow 2s infinite alternate;
+        }
+
+        .menu-btn {
+            cursor: pointer;
+            display: block;
+            z-index: 20;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #00FF96;
+            margin: 5px 0;
+            display: block;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .menu-btn.open .bar:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .menu-btn.open .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-btn.open .bar:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        .nav-links {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.95);
+            padding-top: 80px;
+            text-align: center;
+            z-index: 10;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .nav-links a {
+            display: block;
+            padding: 20px;
+            text-decoration: none;
+            color: #00FF96;
+            font-size: 1.2em;
+            transition: background-color 0.3s;
+        }
+
+        .nav-links a:hover {
+            background-color: rgba(0, 255, 150, 0.1);
+        }
+
+        .nav-links.active {
+            display: block;
+        }
+
+        header {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+            padding: 100px 20px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        header h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            animation: neonGlow 2s infinite alternate;
+        }
+
+        header p {
+            font-size: 1.2em;
+            color: #ddd;
+        }
+
+        section {
+            padding: 60px 20px;
+            text-align: center;
+            overflow: hidden; /* Prevent animation overflow */
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .product-card {
+            background-color: rgba(34, 34, 34, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 255, 150, 0.2);
+        }
+
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .product-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            animation: neonGlow 1.5s infinite alternate;
+        }
+
+        .product-card p {
+            font-size: 1em;
+            color: #ccc;
+        }
+
+        footer {
+            background-color: #111;
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        /* Particle Effect (Optional - Requires JavaScript) */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        /* Customer Review Styles */
+        .customer-reviews {
+            margin-top: 50px;
+        }
+
+        .review-card {
+            background-color: rgba(34, 34, 34, 0.7);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: left;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .review-card h4 {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .review-card p {
+            font-size: 1em;
+            color: #ccc;
+        }
+
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="particles-js"></div>
+
+    <div class="navbar">
+        <div class="logo">CyberStride</div>
+        <div class="menu-btn">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#products">Products</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+
+    <header id="home">
+        <h1>Step Into Tomorrow's Footwear</h1>
+        <p>Experience the future with CyberStride's revolutionary shoe designs.</p>
+    </header>
+
+    <section id="products">
+        <h2>Explore Our Cybernetic Collection</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <img src="https://thumbs.dreamstime.com/b/futuristic-fashion-original-sneakers-future-design-stylish-sport-shoes-neon-glow-urban-aesthetics-sportswear-style-275987342.jpg" alt="Apex Runner">
+                <h3>Apex Runner</h3>
+                <p>Engineered for peak performance, the Apex Runner features adaptive energy systems and a bioluminescent sole.</p>
+            </div>
+            <div class="product-card">
+                <img src="https://thumbs.dreamstime.com/b/futuristic-fashion-original-sneakers-future-design-stylish-sport-shoes-neon-glow-urban-aesthetics-sportswear-style-275987342.jpg" alt="Quantum Leap">
+                <h3>Quantum Leap</h3>
+                <p>Leap into the future with Quantum Leap. Featuring anti-gravity suspension and neural-linked responsiveness.</p>
+            </div>
+            <div class="product-card">
+                <img src="https://thumbs.dreamstime.com/b/futuristic-fashion-original-sneakers-future-design-stylish-sport-shoes-neon-glow-urban-aesthetics-sportswear-style-275987342.jpg" alt="Nova Drive">
+                <h3>Nova Drive</h3>
+                <p>Ignite your speed with Nova Drive. Powered by micro-fusion reactors for unparalleled acceleration and endurance.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="customer-reviews">
+        <h2>Customer Reviews</h2>
+        <div class="review-card">
+            <h4>Anya Petrova</h4>
+            <p>The Apex Runners are a game-changer! I've never experienced such comfort and performance in a shoe. The bioluminescent sole is a real head-turner!</p>
+        </div>
+        <div class="review-card">
+            <h4>Kenji Tanaka</h4>
+            <p>Quantum Leap truly lives up to its name. The anti-gravity suspension feels like walking on air. My agility has improved significantly!</p>
+        </div>
+        <div class="review-card">
+            <h4>Zara Khan</h4>
+            <p>Nova Drive is incredible for long-distance running. The micro-fusion reactors provide a noticeable boost, and the design is sleek and futuristic.</p>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2>About CyberStride</h2>
+        <p>We are pioneers in futuristic footwear, merging cutting-edge technology with ergonomic design to create shoes that redefine performance and style.</p>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>Reach out to us for inquiries, support, and custom design requests.</p>
+        <p>Email: support@cyberstride.net</p>
+        <p>Phone: +1-800-CYBER-NET</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2042 CyberStride. All rights reserved. Engineered in Neo-Tokyo.</p>
+    </footer>
+
+    <script>
+        const menuBtn = document.querySelector('.menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuBtn.addEventListener('click', () => {
+            menuBtn.classList.toggle('open');
+            navLinks.classList.toggle('active');
+        });
+
+
+        /* particlesJS('particles-js', {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#00FF96"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    },
+                    "image": {
+                        "src": "img/github.svg",
+                        "width": 100,
+                        "height": 100
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 1,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 5,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#00FF96",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 6,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 2,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true,
+            "config_demo": {
+                "hide_card": false,
+                "background_color": "#b61924",
+                "background_image": "",
+                "source_code": false,
+                "download": false,
+                "buy_particles": false,
+                "theme": "light"
+            }
+        }); */
+    </script>
+    <!-- <script src="particles.js"></script> -->
+</body>
+</html>
+```
